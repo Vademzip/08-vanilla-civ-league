@@ -1,6 +1,6 @@
 const {community} = require('../models/models')
 const ApiError = require("../error/ApiError");
-const nameGenerator = require("uuid")
+const uuid = require("uuid")
 const path = require("path")
 
 class CommunityController {
@@ -8,7 +8,7 @@ class CommunityController {
         try {
             const {name, size} = req.body //получаем эти данные из запроса
             const {img} = req.files
-            let fileName = nameGenerator.v4() + ".jpg"
+            let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
             const Community = await community.create({name, size, img: fileName}) //create встроенная функция для создание записи
             return res.json(Community)
