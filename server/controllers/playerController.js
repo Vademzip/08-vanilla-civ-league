@@ -1,5 +1,4 @@
 const {player} = require('../models/models')
-
 class PlayerController {
     async create(req, res) {
         const {nickname, country, wins, pts, communityId} = req.body
