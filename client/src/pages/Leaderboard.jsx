@@ -28,7 +28,7 @@ const Leaderboard = observer(() => {
                 </thead>
                 <tbody>
                 {player.players.map((player, index) =>
-                    <PlayerItem key={player.id} index={index} player={player}/>
+                    <PlayerItem key={player.id} index={index} playerInfo={player}/>
                 )}
                 </tbody>
             </Table>

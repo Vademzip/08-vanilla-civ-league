@@ -7,16 +7,15 @@ import {createPlayer} from "../../http/PlayerAPI";
 const CreatePlayer = observer(({show, onHide}) => {
     const {player} = useContext(Context)
     const [nickname, setNickname] = useState('')
-    const [country, setCountry] = useState('')
     const [wins, setWins] = useState(0)
     const [pts, setPts] = useState(0)
     const addPlayer = () => {
         createPlayer(
             nickname,
-            country,
             wins,
             pts,
-            player.selectedCommunity.id
+            player.selectedCommunity.id,
+            player.selectedCountry.id
         ).then(data => onHide())
     }
 
@@ -50,18 +49,27 @@ const CreatePlayer = observer(({show, onHide}) => {
                             )}
                         </Dropdown.Menu>
                     </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle>
+                            {player.selectedCountry? player.selectedCountry.name : "Выберите страну"}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            {player.countries.map(type =>
+                                <Dropdown.Item
+                                    onClick={() => player.setSelectedCountry(type)}
+                                    key={type.id}
+                                >
+                                    {type.name}
+                                </Dropdown.Item>
+                            )}
+                        </Dropdown.Menu>
+                    </Dropdown>
                     <Form.Control
                         className='mt-3'
                         placeholder={'Введите имя игрока'}
                         value={nickname}
                         onChange={(event) => setNickname(event.target.value)}
-
-                    />
-                    <Form.Control
-                        className='mt-3'
-                        placeholder={'Выберите страну'}
-                        value={country}
-                        onChange={(event) => setCountry(event.target.value)}
 
                     />
                     <Form.Control

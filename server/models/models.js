@@ -20,7 +20,6 @@ const favoritePlayers = sequelize.define('favorite_players', {
 const player = sequelize.define('player', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     nickname: {type: DataTypes.STRING, unique: true, allowNull: false},
-    country: {type: DataTypes.STRING, allowNull: true},
     wins: {type: DataTypes.INTEGER, defaultValue: 0},
     pts: {type: DataTypes.INTEGER, defaultValue: 0},
 })
@@ -30,6 +29,12 @@ const community = sequelize.define('community', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     size: {type: DataTypes.STRING, defaultValue: 0},
     img: {type: DataTypes.STRING, allowNull: false},
+})
+
+const country = sequelize.define('country', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false},
+    img: {type: DataTypes.STRING, allowNull: false}
 })
 
 User.hasOne(favoriteList)
@@ -44,10 +49,14 @@ player.belongsTo(community)
 player.hasMany(favoritePlayers)
 favoritePlayers.belongsTo(player)
 
+country.hasMany(player)
+player.belongsTo(country)
+
 module.exports = {
     User,
     favoriteList,
     favoritePlayers,
     player,
-    community
+    community,
+    country
 }

@@ -2,3 +2,9 @@
     border: black 1px solid !important;
     text-align: center !important;
 }
+
+.country-flag img{
+    width: 1.75rem;
+    max-width: 100%;
+    margin-left: 5px;
+}

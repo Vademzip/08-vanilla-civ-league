@@ -14,15 +14,19 @@ export const fetchCommunities = async () => {
     return data
 }
 
+export const fetchCountries = async () => {
+    const {data} =  await $host.get('api/country/')
+    return data
+}
 
 export const createPlayer = async (
     nickname,
-    country,
     wins,
     pts,
-    communityId
+    communityId,
+    countryId
 ) => {
-    const {data} = await $authHost.post('api/player/', {nickname,country,wins,pts,communityId})
+    const {data} = await $authHost.post('api/player/', {nickname,wins,pts,communityId,countryId})
     return data
 }
 

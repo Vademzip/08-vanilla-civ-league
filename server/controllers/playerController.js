@@ -1,8 +1,8 @@
 const {player} = require('../models/models')
 class PlayerController {
     async create(req, res) {
-        const {nickname, country, wins, pts, communityId} = req.body
-        const Player = await player.create({nickname, country, wins, pts, communityId})
+        const {nickname, country, wins, pts, communityId,countryId} = req.body
+        const Player = await player.create({nickname, country, wins, pts, communityId, countryId})
         return res.json(Player)
     }
 

@@ -6,7 +6,7 @@ import {useContext, useEffect, useState} from "react";
 import {Context} from "./index";
 import {checkAuth} from "./http/userAPI";
 import {Spinner} from "react-bootstrap";
-import {fetchCommunities} from "./http/PlayerAPI";
+import {fetchCommunities, fetchCountries} from "./http/PlayerAPI";
 
 const App = observer(() => {
     const {user,player} = useContext(Context)
@@ -14,12 +14,16 @@ const App = observer(() => {
 
     useEffect(()=> {
         checkAuth().then(data => {
-            user.setUser(true)
+            user.setUser(data)
             user.setIsAuth(true)
         }).finally(() => setLoading(false))
 
         fetchCommunities().then(data => {
             player.setCommunity(data)
+        })
+
+        fetchCountries().then(data =>{
+            player.setCountry(data)
         })
 
     }, [])

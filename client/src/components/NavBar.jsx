@@ -21,7 +21,8 @@ const NavBar = observer(() => {
                         League</NavLink>
                     {user.isAuth ?
                         <Nav className="ml-auto" style={{color: "white"}}>
-                            <Button variant={"light"} onClick={() => navigate(ADMIN_ROUTE)} style={{marginRight:"10px"}}>Админ Панель</Button>
+                            {user.user.role === 'ADMIN' && <Button variant={"light"} onClick={() => navigate(ADMIN_ROUTE)}
+                                     style={{marginRight: "10px"}}>Админ Панель</Button>}
                             <Button variant={"light"} onClick={logOut}>Выйти</Button>
                         </Nav>
                         : <Nav className="ml-auto">
