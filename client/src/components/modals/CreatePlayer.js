@@ -5,98 +5,98 @@ import {observer} from "mobx-react-lite";
 import {createPlayer} from "../../http/PlayerAPI";
 
 const CreatePlayer = observer(({show, onHide}) => {
-    const {player} = useContext(Context)
-    const [nickname, setNickname] = useState('')
-    const [wins, setWins] = useState(0)
-    const [pts, setPts] = useState(0)
-    const addPlayer = () => {
-        createPlayer(
-            nickname,
-            wins,
-            pts,
-            player.selectedCommunity.id,
-            player.selectedCountry.id
-        ).then(data => onHide())
-    }
+  const {player} = useContext(Context)
+  const [nickname, setNickname] = useState('')
+  const [wins, setWins] = useState(0)
+  const [pts, setPts] = useState(0)
+  const addPlayer = () => {
+    createPlayer(
+      nickname,
+      wins,
+      pts,
+      player.selectedCommunity.id,
+      player.selectedCountry.id
+    ).then(data => onHide())
+  }
 
 
-    return (
-        <Modal
-            show={show}
-            onHide={onHide}
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Добавить игрока
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
-                    <Dropdown>
-                        <Dropdown.Toggle>
-                            {player.selectedCommunity? player.selectedCommunity.name : "Выберите сообщество"}
-                        </Dropdown.Toggle>
+  return (
+    <Modal
+      show={show}
+      onHide={onHide}
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Добавить игрока
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Dropdown>
+            <Dropdown.Toggle>
+              {player.selectedCommunity ? player.selectedCommunity.name : "Выберите сообщество"}
+            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            {player.communities.map(type =>
-                                <Dropdown.Item
-                                    onClick={() => player.setSelectedCommunity(type)}
-                                    key={type.id}
-                                >
-                                    {type.name}
-                                </Dropdown.Item>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <Dropdown>
-                        <Dropdown.Toggle>
-                            {player.selectedCountry? player.selectedCountry.name : "Выберите страну"}
-                        </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {player.communities.map(type =>
+                <Dropdown.Item
+                  onClick={() => player.setSelectedCommunity(type)}
+                  key={type.id}
+                >
+                  {type.name}
+                </Dropdown.Item>
+              )}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle>
+              {player.selectedCountry ? player.selectedCountry.name : "Выберите страну"}
+            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            {player.countries.map(type =>
-                                <Dropdown.Item
-                                    onClick={() => player.setSelectedCountry(type)}
-                                    key={type.id}
-                                >
-                                    {type.name}
-                                </Dropdown.Item>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <Form.Control
-                        className='mt-3'
-                        placeholder={'Введите имя игрока'}
-                        value={nickname}
-                        onChange={(event) => setNickname(event.target.value)}
+            <Dropdown.Menu>
+              {player.countries.map(type =>
+                <Dropdown.Item
+                  onClick={() => player.setSelectedCountry(type)}
+                  key={type.id}
+                >
+                  {type.name}
+                </Dropdown.Item>
+              )}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Form.Control
+            className='mt-3'
+            placeholder={'Введите имя игрока'}
+            value={nickname}
+            onChange={(event) => setNickname(event.target.value)}
 
-                    />
-                    <Form.Control
-                        className='mt-3'
-                        placeholder={'Введите количество побед'}
-                        type={'number'}
-                        value={wins}
-                        onChange={(event) => setWins(event.target.value)}
+          />
+          <Form.Control
+            className='mt-3'
+            placeholder={'Введите количество побед'}
+            type={'number'}
+            value={wins}
+            onChange={(event) => setWins(event.target.value)}
 
-                    />
-                    <Form.Control
-                        className='mt-3'
-                        placeholder={'Введите количество очков'}
-                        type={'number'}
-                        value={pts}
-                        onChange={(event) => setPts(event.target.value)}
+          />
+          <Form.Control
+            className='mt-3'
+            placeholder={'Введите количество очков'}
+            type={'number'}
+            value={pts}
+            onChange={(event) => setPts(event.target.value)}
 
-                    />
-                    <hr/>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
-                <Button variant="outline-success" onClick={addPlayer}>Добавить</Button>
-            </Modal.Footer>
-        </Modal>
-    );
+          />
+          <hr/>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
+        <Button variant="outline-success" onClick={addPlayer}>Добавить</Button>
+      </Modal.Footer>
+    </Modal>
+  );
 });
 
 export default CreatePlayer;

@@ -27,7 +27,6 @@ class UserController {
         const FavoriteList = await favoriteList.create({userId: user.id})
         const jwtToken = generateJwt(user.id, user.email, user.role)
         return res.json(jwtToken)
-
     }
 
     async login(req, res, next) {
